@@ -1,14 +1,17 @@
 <script>
+import TaskList from './TaskList.vue'
 export default {
+  components: {TaskList},
   data() {
     return {
-      task: [],
+      tasks: [],
       taskInput: "",
     };
   },
   methods: {
     addTask() {
-      console.log("wrong", this.taskInput);
+        this.tasks.push({ task : this.taskInput, status :'pending'});
+        console.log(this.tasks);
     },
   },
 };
@@ -22,13 +25,14 @@ export default {
       v-model="taskInput"
     />
     <button
-      class="text-bold ml-2 rounded-2xl bg-black p-3 text-lg text-white"
+      class="text-bold ml-2 rounded-2xl bg-black p-3 text-lg text-white disabled:opacity-70"
       :disabled="!taskInput"
       @click="addTask"
     >
       Add Task
     </button>
   </div>
+  <TaskList :tasks="tasks" />
 </template>
 
 <style lang="scss" scoped></style>
